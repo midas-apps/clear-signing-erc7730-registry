@@ -1,0 +1,66 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "./common-eip712.json",
+    "display": {
+        "definitions": {
+            "tokenOut": {
+                "label": "Output token",
+                "format": "addressName",
+                "params": {
+                    "type": "contract"
+                }
+            },
+            "amountMTokenIn": {
+                "label": "Input mToken amount",
+                "format": "amount"
+            },
+            "minReceiveAmount": {
+                "label": "Min. out. token to receive",
+                "format": "amount"
+            }
+        },
+        "formats": {
+            "redeemInstant(address tokenOut, uint256 amountMTokenIn, uint256 minReceiveAmount": {
+                "$id": "instantRedeem",
+                "intent": "Instant Redeem",
+                "fields": [
+                    {
+                        "path": "tokenOut",
+                        "$ref": "$.display.definitions.tokenOut"
+                    },
+                    {
+                        "path": "amountMTokenIn",
+                        "$ref": "$.display.definitions.amountMTokenIn"
+                    },
+                    {
+                        "path": "minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    }
+                ],
+                "required": [
+                    "tokenOut",
+                    "amountMTokenIn",
+                    "minReceiveAmount"
+                ]
+            },
+            "redeemRequest(address tokenOut, uint256 amountMTokenIn)": {
+                "$id": "redeemRequest",
+                "intent": "Redeem request",
+                "fields": [
+                    {
+                        "path": "tokenOut",
+                        "$ref": "$.display.definitions.tokenOut"
+                    },
+                    {
+                        "path": "amountMTokenIn",
+                        "$ref": "$.display.definitions.amountMTokenIn"
+                    }
+                ],
+                "required": [
+                    "tokenOut",
+                    "amountMTokenIn"
+                ]
+            }
+        }
+    }
+}

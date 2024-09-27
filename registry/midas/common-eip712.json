@@ -1,0 +1,12 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    
+    "metadata": {
+        "owner": "Midas",
+        "info": {
+            "url": "https://midas.app",
+            "legalName": "Midas Protocol",
+            "lastUpdate": "2024-09-27T10:27:00.351Z"
+        }
+    }
+}
