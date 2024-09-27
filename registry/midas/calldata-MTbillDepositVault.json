@@ -1,6 +1,12 @@
 {
     "$schema": "../../specs/erc7730-v1.schema.json",
     "includes": "./common-calldata-DepositVault.json",
+    "metadata": {
+        "constants": {
+            "instantMintIntent": "mTBILL Instant Mint",
+            "mintRequestIntent": "mTBILL Mint Request"
+        }
+    },
     "context": {
         "$id": "Midas mTBILL DepositVault contract",
         "contract": {

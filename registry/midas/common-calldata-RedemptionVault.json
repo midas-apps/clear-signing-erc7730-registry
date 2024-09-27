@@ -1,6 +1,12 @@
 {
     "$schema": "../../specs/erc7730-v1.schema.json",
     "includes": "./common-eip712.json",
+    "metadata": {
+        "constants": {
+            "instantRedeemIntent": "Instant Redeem",
+            "redeemRequestIntent": "Redeem Request"
+        }
+    },
     "context": {
         "contract": {
             "abi": [
@@ -75,7 +81,7 @@
         "formats": {
             "redeemInstant(address tokenOut, uint256 amountMTokenIn, uint256 minReceiveAmount": {
                 "$id": "instantRedeem",
-                "intent": "Instant Redeem",
+                "intent": "$.metadata.constants.instantRedeemIntent",
                 "fields": [
                     {
                         "path": "tokenOut",
@@ -98,7 +104,7 @@
             },
             "redeemRequest(address tokenOut, uint256 amountMTokenIn)": {
                 "$id": "redeemRequest",
-                "intent": "Redeem request",
+                "intent": "$.metadata.constants.redeemRequestIntent",
                 "fields": [
                     {
                         "path": "tokenOut",

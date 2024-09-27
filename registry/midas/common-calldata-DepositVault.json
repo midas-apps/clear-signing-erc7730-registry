@@ -1,6 +1,12 @@
 {
     "$schema": "../../specs/erc7730-v1.schema.json",
     "includes": "./common-eip712.json",
+    "metadata": {
+        "constants": {
+            "instantMintIntent": "Instant Mint",
+            "mintRequestIntent": "Mint Request"
+        }
+    },
     "context": {
         "contract": {
             "abi": [
@@ -85,7 +91,7 @@
         "formats": {
             "depositInstant(address tokenIn, uint256 amountToken, uint256 minReceiveAmount, bytes32 referrerId)": {
                 "$id": "instantMint",
-                "intent": "Instant Mint",
+                "intent": "$.metadata.constants.instantMintIntent",
                 "fields": [
                     {
                         "path": "tokenIn",
@@ -108,7 +114,7 @@
             },
             "depositRequest(address tokenIn, uint256 amountToken, bytes32 referrerId)": {
                 "$id": "mintRequest",
-                "intent": "Mint request",
+                "intent": "$.metadata.constants.mintRequestIntent",
                 "fields": [
                     {
                         "path": "tokenIn",
