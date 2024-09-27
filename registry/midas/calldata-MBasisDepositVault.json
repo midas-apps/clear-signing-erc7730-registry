@@ -1,0 +1,15 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "./common-calldata-DepositVault.json",
+    "context": {
+        "$id": "Midas mBASIS DepositVault contract",
+        "contract": {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0xa8a5c4FF4c86a459EBbDC39c5BE77833B3A15d88"
+                }
+            ]
+        }
+    }
+}

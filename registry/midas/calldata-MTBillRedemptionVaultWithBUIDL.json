@@ -1,0 +1,15 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "./common-calldata-RedemptionVault.json",
+    "context": {
+        "$id": "Midas mTBILL RedemptionVaultWithBUIDL contract",
+        "contract": {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x569D7dccBF6923350521ecBC28A555A500c4f0Ec"
+                }
+            ]
+        }
+    }
+}
