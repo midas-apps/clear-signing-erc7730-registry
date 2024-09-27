@@ -1,0 +1,30 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "../../ercs/calldata-erc20-tokens.json",
+
+    "context": {
+        "$id": "Midas Basis Trading Token",
+        "contract" : {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x2a8c22E3b10036f3AEF5875d04f8441d4188b656"
+        
+                }
+            ]
+        }
+    }, 
+    "metadata": {
+        "owner": "Midas",
+        "info": {
+            "url": "https://midas.app",
+            "legalName": "Midas Protocol",
+            "lastUpdate": "2024-09-27T10:27:00.351Z"
+        },
+        "token": {
+            "ticker": "mBASIS",
+            "name": "Midas Basis Trading Token",
+            "decimals": 18
+        }
+    }
+}

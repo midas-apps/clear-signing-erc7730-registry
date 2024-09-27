@@ -1,0 +1,135 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "./common-eip712.json",
+    "metadata": {
+        "constants": {
+            "instantMintIntent": "Instant Mint",
+            "mintRequestIntent": "Mint Request"
+        }
+    },
+    "context": {
+        "contract": {
+            "abi": [
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "tokenIn",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amountToken",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "minReceiveAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "referrerId",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "name": "depositInstant",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "tokenIn",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amountToken",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "referrerId",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "name": "depositRequest",
+                    "outputs": [
+                        {
+                            "internalType": "uint256",
+                            "name": "requestId",
+                            "type": "uint256"
+                        }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                }
+            ]
+        }
+    },
+    "display": {
+        "definitions": {
+            "tokenIn": {
+                "label": "Input token",
+                "format": "addressName",
+                "params": {
+                    "type": "contract"
+                }
+            },
+            "amountToken": {
+                "label": "Input token amount",
+                "format": "amount"
+            },
+            "minReceiveAmount": {
+                "label": "Min. mToken to receive",
+                "format": "amount"
+            }
+        },
+        "formats": {
+            "depositInstant(address tokenIn, uint256 amountToken, uint256 minReceiveAmount, bytes32 referrerId)": {
+                "$id": "instantMint",
+                "intent": "$.metadata.constants.instantMintIntent",
+                "fields": [
+                    {
+                        "path": "tokenIn",
+                        "$ref": "$.display.definitions.tokenIn"
+                    },
+                    {
+                        "path": "amountToken",
+                        "$ref": "$.display.definitions.amountToken"
+                    },
+                    {
+                        "path": "minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    }
+                ],
+                "required": [
+                    "tokenIn",
+                    "amountToken",
+                    "minReceiveAmount"
+                ]
+            },
+            "depositRequest(address tokenIn, uint256 amountToken, bytes32 referrerId)": {
+                "$id": "mintRequest",
+                "intent": "$.metadata.constants.mintRequestIntent",
+                "fields": [
+                    {
+                        "path": "tokenIn",
+                        "$ref": "$.display.definitions.tokenIn"
+                    },
+                    {
+                        "path": "amountToken",
+                        "$ref": "$.display.definitions.amountToken"
+                    }
+                ],
+                "required": [
+                    "tokenIn",
+                    "amountToken"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "./common-calldata-RedemptionVault.json",
+    "metadata": {
+        "constants": {
+            "instantRedeemIntent": "mBASIS Instant Redeem",
+            "redeemRequestIntent": "mBASIS Redeem Request"
+        }
+    },
+    "context": {
+        "$id": "Midas mBASIS RedemptionVaultWithSwapper contract",
+        "contract": {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x0D89C1C4799353F3805A3E6C4e1Cbbb83217D123"
+                }
+            ]
+        }
+    }
+}
