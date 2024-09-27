@@ -1,0 +1,30 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "../../ercs/calldata-erc20-tokens.json",
+
+    "context": {
+        "$id": "Midas US Treasury Bill Token",
+        "contract" : {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0xDD629E5241CbC5919847783e6C96B2De4754e438"
+        
+                }
+            ]
+        }
+    }, 
+    "metadata": {
+        "owner": "Midas",
+        "info": {
+            "url": "https://midas.app",
+            "legalName": "Midas Protocol",
+            "lastUpdate": "2024-09-27T10:27:00.351Z"
+        },
+        "token": {
+            "ticker": "mTBILL",
+            "name": "Midas US Treasury Bill Token",
+            "decimals": 18
+        }
+    }
+}
