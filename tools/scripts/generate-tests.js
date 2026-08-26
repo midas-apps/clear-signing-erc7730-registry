@@ -700,8 +700,6 @@ async function getRawTransaction(chainId, txHash) {
 // Function Signature Utilities
 // =============================================================================
 
-
-
 /**
  * Normalize function signature for selector computation
  * "transfer(address to, uint256 amount)" -> "transfer(address,uint256)"
@@ -844,14 +842,6 @@ function resolveDescriptorWithCli(filePath, isV2) {
   return null;
 }
 
-/**
- * Create a temporary file containing the resolved (includes-inlined) descriptor.
- * The tester / API requires a self-contained descriptor with `display`; files that
- * derive their formats via `includes` must be resolved first.
- *
- * @param {string} filePath - Original descriptor path
- * @returns {string|null} Path to the temp file, or null if resolution failed/unnecessary
- */
 /**
  * Deep-merge two plain objects (b overrides a). Arrays are replaced, not concatenated.
  */
@@ -1082,7 +1072,7 @@ function computeSelectorManual(signature) {
 
 /**
  * Compute the first four bytes of the Keccak-256 hash of a function signature.
- * The runtime dependency is mandatory because SHA3-256 and Keccak-256 differ.
+ * The runtime dependency 'js-sha3' is mandatory because SHA3-256 and Keccak-256 differ.
  */
 function computeKeccak256Selector(input) {
   const { keccak256 } = require("js-sha3");
