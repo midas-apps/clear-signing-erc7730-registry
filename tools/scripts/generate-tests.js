@@ -47,7 +47,7 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const http = require("http");
-const crypto = require("crypto");
+
 const os = require("os");
 const { execSync, spawn } = require("child_process");
 
@@ -701,63 +701,6 @@ async function getRawTransaction(chainId, txHash) {
 // =============================================================================
 
 /**
- * Compute function selector (first 4 bytes of keccak256 hash)
- */
-function computeSelector(signature) {
-  // Normalize signature: remove param names, spaces
-  const normalized = normalizeSignature(signature);
-  const hash = crypto.createHash("sha3-256");
-  // Note: Node's sha3-256 is actually Keccak-256
-  // For proper Keccak, we need to use a different approach
-  return keccak256(normalized).slice(0, 10);
-}
-
-/**
- * Simple Keccak-256 implementation for function selectors
- */
-function keccak256(input) {
-  // Use the keccak256 from crypto if available (Node 16+)
-  // Otherwise fall back to a pure JS implementation
-  try {
-    const { createHash } = require("crypto");
-    // Node.js doesn't have native keccak, so we'll compute selector differently
-    // For now, extract from signature pattern
-    return computeSelectorFromSignature(input);
-  } catch (e) {
-    return computeSelectorFromSignature(input);
-  }
-}
-
-/**
- * Compute selector using Web Crypto or manual implementation
- */
-function computeSelectorFromSignature(signature) {
-  // Keccak-256 implementation for function selectors
-  const Keccak = require("./keccak-tiny");
-  if (typeof Keccak !== "undefined") {
-    return "0x" + Keccak.keccak256(signature).slice(0, 8);
-  }
-
-  // Fallback: use a lookup table for common functions
-  // This is a simplified approach - in production, use a proper keccak library
-  const hash = simpleHash(signature);
-  return "0x" + hash.slice(0, 8);
-}
-
-/**
- * Simple hash fallback (not cryptographically secure, just for matching)
- */
-function simpleHash(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    const char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
-  }
-  return Math.abs(hash).toString(16).padStart(8, "0");
-}
-
-/**
  * Normalize function signature for selector computation
  * "transfer(address to, uint256 amount)" -> "transfer(address,uint256)"
  */
@@ -899,14 +842,6 @@ function resolveDescriptorWithCli(filePath, isV2) {
   return null;
 }
 
-/**
- * Create a temporary file containing the resolved (includes-inlined) descriptor.
- * The tester / API requires a self-contained descriptor with `display`; files that
- * derive their formats via `includes` must be resolved first.
- *
- * @param {string} filePath - Original descriptor path
- * @returns {string|null} Path to the temp file, or null if resolution failed/unnecessary
- */
 /**
  * Deep-merge two plain objects (b overrides a). Arrays are replaced, not concatenated.
  */
@@ -1136,24 +1071,12 @@ function computeSelectorManual(signature) {
 }
 
 /**
- * Keccak-256 selector computation (simplified)
- * In production, use a proper library like 'keccak' or 'js-sha3'
+ * Compute the first four bytes of the Keccak-256 hash of a function signature.
+ * The runtime dependency 'js-sha3' is mandatory because SHA3-256 and Keccak-256 differ.
  */
 function computeKeccak256Selector(input) {
-  // Try to use js-sha3 if available
-  try {
-    const { keccak256 } = require("js-sha3");
-    return "0x" + keccak256(input).slice(0, 8);
-  } catch (e) {
-    // Fallback: use built-in crypto with SHA3-256 (not exactly Keccak but close for our purposes)
-    try {
-      const hash = crypto.createHash("sha3-256").update(input).digest("hex");
-      return "0x" + hash.slice(0, 8);
-    } catch (e2) {
-      // Ultimate fallback
-      return "0x" + simpleHash(input);
-    }
-  }
+  const { keccak256 } = require("js-sha3");
+  return "0x" + keccak256(input).slice(0, 8);
 }
 
 // =============================================================================
